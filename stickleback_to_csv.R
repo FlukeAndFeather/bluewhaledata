@@ -11,7 +11,7 @@ dir.create("data/events")
 
 write_sensors <- function(df) {
   deployid <- df$deployid[1]
-  file_path <- sprintf("data/sensors/%s.csv", deployid)
+  file_path <- sprintf("data/sensors/%s_sensors.csv", deployid)
   df %>%
     select(-deployid) %>%
     rename(timestamp_utc = datetime) %>%
@@ -20,7 +20,7 @@ write_sensors <- function(df) {
 
 write_events <- function(df) {
   deployid <- df$deployid[1]
-  file_path <- sprintf("data/events/%s.csv", deployid)
+  file_path <- sprintf("data/events/%s_events.csv", deployid)
   df %>%
     select(-deployid) %>%
     rename(lunge = datetime) %>%
@@ -37,4 +37,4 @@ events_df %>%
 
 zip("bluewhaledata.zip", "data/")
 
-
+unlink("data", recursive = TRUE)
